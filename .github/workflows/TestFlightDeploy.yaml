@@ -23,7 +23,7 @@ jobs:
           set -eo pipefail
 
           xcodebuild -project $(cat PROJECT_NAME).xcodeproj \
-            -scheme $scheme
+            -scheme $(cat SCHEME) \
             -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
             clean test | xcpretty
 
