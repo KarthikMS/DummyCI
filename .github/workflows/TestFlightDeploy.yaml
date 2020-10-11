@@ -15,7 +15,7 @@ jobs:
 
       - name: Test
         run: |
-          set -eo pipefail
+          # set -eo pipefail
 
           xcodebuild -project DummyCI.xcodeproj \
             -scheme DummyCI \
@@ -33,7 +33,7 @@ jobs:
 
       - name: Archiving project
         run: |
-          set -eo pipefail
+          # set -eo pipefail
 
           xcodebuild -project DummyCI.xcodeproj \
             -scheme DummyCI
@@ -44,7 +44,7 @@ jobs:
 
       - name: Exporting .ipa
         run: |
-          set -eo pipefail
+          # set -eo pipefail
 
           xcodebuild -archivePath $PWD/build/DummyCI.xcarchive \
             -exportOptionsPlist ExportOptions.plist \
