@@ -1,4 +1,3 @@
-#!/bin/sh
 set -eo pipefail
 
 PROFILE_NAME="ca97b3a8-94d4-466e-837c-5029c83aea58.mobileprovision"
