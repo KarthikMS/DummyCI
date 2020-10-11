@@ -15,13 +15,13 @@ jobs:
           PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
           CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
         run: |
-        if [ $PROFILE_DECRYPTION_KEY == "superSecretPassPhrase1" ]
+        if [ "$PROFILE_DECRYPTION_KEY" == "superSecretPassPhrase1" ]
         then
           echo "Prov pass Correct"
         else 
           echo "Prov pass NOT correct"
         fi
-        if [ $CERTIFICATE_DECRYPTION_KEY == "superSecretPassPhrase1" ]
+        if [ "$CERTIFICATE_DECRYPTION_KEY" == "superSecretPassPhrase1" ]
         then
           echo "cert pass Correct"
         else
