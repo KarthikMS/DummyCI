@@ -13,14 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
 
-      - name: Test
-        run: |
-          # set -eo pipefail
+      # - name: Test
+      #   run: |
+      #     # set -eo pipefail
 
-          xcodebuild -project DummyCI.xcodeproj \
-            -scheme DummyCI \
-            -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
-            clean test | xcpretty
+      #     xcodebuild -project DummyCI.xcodeproj \
+      #       -scheme DummyCI \
+      #       -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
+      #       clean test | xcpretty
 
       - name: Install gpg
         run: brew install gnupg
