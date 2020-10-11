@@ -19,7 +19,7 @@ jobs:
 
           xcodebuild -project DummyCI.xcodeproj \
             -scheme DummyCI \
-            -destination platform=iOS\ Simulator,OS=13.7,name=Generic\ iOS\ Simulator\ Device \
+            -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
             clean test | xcpretty
 
       - name: Install gpg
