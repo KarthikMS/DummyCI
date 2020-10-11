@@ -1,0 +1,64 @@
+name: TestFlightDeploy
+on:
+  push:
+    branches:
+      - main
+
+variables: 
+  project_name: DummyCI
+  scheme: DummyCI
+
+jobs:
+  deploy:
+    name: Deploying to Testflight
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Test
+        run: |
+          set -eo pipefail
+
+          xcodebuild -project ${project_name}.xcodeproj \
+            -scheme $scheme
+            -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
+            clean test | xcpretty
+
+      - name: Install gpg
+        run: brew install gnupg
+
+      - name: Setup provisioning profile
+        env:
+          PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
+          CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
+        run: ./.github/secrets/decrypt_secrets.sh
+
+      - name: Archiving project
+        run: |
+          set -eo pipefail
+
+          xcodebuild -project ${project_name}.xcodeproj \
+            -scheme ${scheme}
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath $PWD/build/${project_name}.xcarchive \
+            clean archive | xcpretty
+
+      - name: Exporting .ipa
+        run: |
+          set -eo pipefail
+
+          xcodebuild -archivePath $PWD/build/${project_name}.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath $PWD/build \
+            -allowProvisioningUpdates \
+            -exportArchive | xcpretty
+
+      - name: Publishing app
+        if: success()
+        env:
+          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        run: xcrun altool --upload-app -t ios -f build/${project_name}.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose
