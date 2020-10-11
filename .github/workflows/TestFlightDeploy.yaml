@@ -23,7 +23,7 @@ jobs:
       #       clean test | xcpretty
 
       - name: Install gpg
-        run: brew install gnupg
+        run: brew install gpg #gnupg
 
       - name: Setup provisioning profile
         env:
