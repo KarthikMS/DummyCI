@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: del
         run: |
-        if [ ${{ secrets.PROFILE_DECRYPTION_KEY }} == "superSecretPassPhrase1" ]; then echo "Prov pass Correct"; fi
-        if [ ${{ secrets.CERTIFICATE_DECRYPTION_KEY }} == "superSecretPassPhrase1" ]; then echo "cert pass Correct"; fi
+        if [ ${{ secrets.PROFILE_DECRYPTION_KEY }} = "superSecretPassPhrase1" ]; then echo "Prov pass Correct"; fi
+        if [ ${{ secrets.CERTIFICATE_DECRYPTION_KEY }} = "superSecretPassPhrase1" ]; then echo "cert pass Correct"; fi
 
 
       - name: Checkout repository
