@@ -53,9 +53,14 @@ jobs:
           echo "Moved profile"
           
 
+          # del
+          FILE=./.github/secrets/Certificates.p12
+          if test -f "$FILE"; then echo "$FILE exists."; fi
+          # del
+
           # Adding certificate to keychain
           echo "Adding certificate to keychain"
-          
+
           security create-keychain -p "" build.keychain
           security import ./.github/secrets/Certificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "" -A
           
