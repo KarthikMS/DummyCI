@@ -31,30 +31,16 @@ jobs:
             P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
           run: ./.github/secrets/decrypt_secrets.sh
 
-      # - name: Archiving project
-      #   run: |
-      #     set -eo pipefail
+        - name: Archiving project
+          run: ./.github/scripts/archive.sh
+      
 
-      #     xcodebuild -project DummyCI.xcodeproj \
-      #       -scheme DummyCI \
-      #       -sdk iphoneos \
-      #       -configuration Release \
-      #       -archivePath $PWD/build/DummyCI.xcarchive \
-      #       clean archive | xcpretty
+        - name: Exporting .ipa
+          run: ./.github/scripts/export_ipa.sh
 
-      # - name: Exporting .ipa
-      #   run: |
-      #     set -eo pipefail
-
-      #     xcodebuild -archivePath $PWD/build/DummyCI.xcarchive \
-      #       -exportOptionsPlist ExportOptions.plist \
-      #       -exportPath $PWD/build \
-      #       -allowProvisioningUpdates \
-      #       -exportArchive | xcpretty
-
-      # - name: Publishing app
-      #   if: success()
-      #   env:
-      #     APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
-      #     APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
-      #   run: xcrun altool --upload-app -t ios -f $PWD/build/DummyCI.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose
+        - name: Publishing app
+          if: success()
+          env:
+            APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+            APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+          run: ./.github/scripts/upload_app.sh
