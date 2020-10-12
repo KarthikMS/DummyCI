@@ -31,12 +31,12 @@ jobs:
       # - name: Install gpg
       #   run: brew install gpg
 
-      - name: Setup provisioning profile
-        env:
-          PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-          CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
-          P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
-        run: ./.github/secrets/decrypt_secrets.sh
+        - name: Setup provisioning profile
+          env:
+            PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
+            CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
+            P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
+          run: ./.github/secrets/decrypt_secrets.sh
       #   run: |
           # set -eo pipefail
 
