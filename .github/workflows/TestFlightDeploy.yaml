@@ -10,90 +10,96 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1
+        - name: Test script
+        - env: 
+            PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
+        - run: |
+            exec DummyScript.sh
 
-      - name: Test
-        run: |
-          # set -eo pipefail
+      # - name: Checkout repository
+      #   uses: actions/checkout@v1
 
-          xcodebuild -project DummyCI.xcodeproj \
-            -scheme DummyCI \
-            -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
-            clean test | xcpretty
+      # - name: Test
+      #   run: |
+      #     # set -eo pipefail
 
-      - name: Install gpg
-        run: brew install gpg
+      #     xcodebuild -project DummyCI.xcodeproj \
+      #       -scheme DummyCI \
+      #       -destination platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11 \
+      #       clean test | xcpretty
 
-      - name: Setup provisioning profile
-        env:
-          PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-          CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
-          P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
-        # run: |
-        #   exec .github/secrets/decrypt_secrets.sh
-        run: |
-          set -eo pipefail
+      # - name: Install gpg
+      #   run: brew install gpg
 
-          PROFILE_NAME="Dummy_Wildcard_iOS_Distribution_Profile.mobileprovision"
+      # - name: Setup provisioning profile
+      #   env:
+      #     PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
+      #     CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
+      #     P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
+      #   # run: |
+      #   #   exec .github/secrets/decrypt_secrets.sh
+      #   run: |
+      #     set -eo pipefail
 
-          # Decrypting files
-          echo "Decrypting files"
+      #     PROFILE_NAME="Dummy_Wildcard_iOS_Distribution_Profile.mobileprovision"
 
-          gpg --verbose --batch --yes --decrypt --passphrase="$PROFILE_DECRYPTION_KEY" --output ./.github/secrets/${PROFILE_NAME} ./.github/secrets/${PROFILE_NAME}.gpg
-          gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/Certificates.p12 ./.github/secrets/Certificates.p12.gpg
+      #     # Decrypting files
+      #     echo "Decrypting files"
+
+      #     gpg --verbose --batch --yes --decrypt --passphrase="$PROFILE_DECRYPTION_KEY" --output ./.github/secrets/${PROFILE_NAME} ./.github/secrets/${PROFILE_NAME}.gpg
+      #     gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/Certificates.p12 ./.github/secrets/Certificates.p12.gpg
           
-          echo "Finished decryption"
+      #     echo "Finished decryption"
 
 
-          # Moving Profile to destination
-          echo "Moving Profile to destination"
+      #     # Moving Profile to destination
+      #     echo "Moving Profile to destination"
 
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp ./.github/secrets/${PROFILE_NAME} ~/Library/MobileDevice/Provisioning\ Profiles/${PROFILE_NAME}
+      #     mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+      #     cp ./.github/secrets/${PROFILE_NAME} ~/Library/MobileDevice/Provisioning\ Profiles/${PROFILE_NAME}
           
-          echo "Moved profile"
+      #     echo "Moved profile"
 
 
-          # Adding certificate to keychain
-          echo "Adding certificate to keychain"
+      #     # Adding certificate to keychain
+      #     echo "Adding certificate to keychain"
 
-          KEYCHAIN=~/Library/Keychains/build.keychain
-          PASS_PHRASE="some"
+      #     KEYCHAIN=~/Library/Keychains/build.keychain
+      #     PASS_PHRASE="some"
 
-          security create-keychain -p $PASS_PHRASE build.keychain
-          security import ./.github/secrets/Certificates.p12 -t agg -k $KEYCHAIN -P $P12_PASSPHRASE -A
+      #     security create-keychain -p $PASS_PHRASE build.keychain
+      #     security import ./.github/secrets/Certificates.p12 -t agg -k $KEYCHAIN -P $P12_PASSPHRASE -A
           
-          security list-keychains -s $KEYCHAIN
-          security default-keychain -s $KEYCHAIN
-          security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
+      #     security list-keychains -s $KEYCHAIN
+      #     security default-keychain -s $KEYCHAIN
+      #     security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
           
-          security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
+      #     security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
 
-      - name: Archiving project
-        run: |
-          set -eo pipefail
+      # - name: Archiving project
+      #   run: |
+      #     set -eo pipefail
 
-          xcodebuild -project DummyCI.xcodeproj \
-            -scheme DummyCI \
-            -sdk iphoneos \
-            -configuration Release \
-            -archivePath $PWD/build/DummyCI.xcarchive \
-            clean archive | xcpretty
+      #     xcodebuild -project DummyCI.xcodeproj \
+      #       -scheme DummyCI \
+      #       -sdk iphoneos \
+      #       -configuration Release \
+      #       -archivePath $PWD/build/DummyCI.xcarchive \
+      #       clean archive | xcpretty
 
-      - name: Exporting .ipa
-        run: |
-          set -eo pipefail
+      # - name: Exporting .ipa
+      #   run: |
+      #     set -eo pipefail
 
-          xcodebuild -archivePath $PWD/build/DummyCI.xcarchive \
-            -exportOptionsPlist ExportOptions.plist \
-            -exportPath $PWD/build \
-            -allowProvisioningUpdates \
-            -exportArchive | xcpretty
+      #     xcodebuild -archivePath $PWD/build/DummyCI.xcarchive \
+      #       -exportOptionsPlist ExportOptions.plist \
+      #       -exportPath $PWD/build \
+      #       -allowProvisioningUpdates \
+      #       -exportArchive | xcpretty
 
-      - name: Publishing app
-        if: success()
-        env:
-          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
-          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
-        run: xcrun altool --upload-app -t ios -f $PWD/build/DummyCI.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose
+      # - name: Publishing app
+      #   if: success()
+      #   env:
+      #     APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+      #     APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+      #   run: xcrun altool --upload-app -t ios -f $PWD/build/DummyCI.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose
