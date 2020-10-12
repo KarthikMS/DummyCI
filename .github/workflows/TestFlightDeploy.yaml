@@ -60,11 +60,11 @@ jobs:
           security create-keychain -p $PASS_PHRASE build.keychain
           security import ./.github/secrets/Certificates.p12 -t agg -k $KEYCHAIN -P $PASS_PHRASE -A
           
-          security list-keychains -s $KEYCHAIN
-          security default-keychain -s $KEYCHAIN
-          security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
+          # security list-keychains -s $KEYCHAIN
+          # security default-keychain -s $KEYCHAIN
+          # security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
           
-          security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
+          # security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
 
       - name: Archiving project
         run: |
