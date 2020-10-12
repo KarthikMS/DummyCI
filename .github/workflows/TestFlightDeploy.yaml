@@ -10,8 +10,8 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-       - name: Checkout repository
-         uses: actions/checkout@v1
+        - name: Checkout repository
+          uses: actions/checkout@v1
 
         - name: Test script
           env: 
