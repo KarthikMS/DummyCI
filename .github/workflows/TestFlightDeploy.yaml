@@ -11,7 +11,7 @@ jobs:
 
     steps:
         - name: Print contents
-          run: ls -a
+          run: cd ./.github; ls -a
 
         - name: Test script
           env: 
