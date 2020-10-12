@@ -60,7 +60,7 @@ jobs:
           PASS_PHRASE="Gonnai"
 
           security create-keychain -p $PASS_PHRASE build.keychain
-          security import ./.github/secrets/Certificates.p12 -t agg -x -k $KEYCHAIN -P $PASS_PHRASE -A
+          security import ./.github/secrets/Certificates.p12 -t agg -f pkcs12 -k $KEYCHAIN -P $PASS_PHRASE -A
           
           # security list-keychains -s $KEYCHAIN
           # security default-keychain -s $KEYCHAIN
