@@ -66,7 +66,7 @@ jobs:
           security default-keychain -s $KEYCHAIN
           security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
           
-          security set-key-partition-list -S apple-tool:,apple: -s -k "" $KEYCHAIN
+          security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
 
       - name: Archiving project
         run: |
