@@ -30,7 +30,7 @@ jobs:
           PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
           CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
         run: |
-          ./.github/secrets/decrypt_secrets.sh
+          exec .github/secrets/decrypt_secrets.sh
         # run: |
         #   # set -eo pipefail
 
