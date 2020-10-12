@@ -35,7 +35,7 @@ jobs:
         run: |
           # set -eo pipefail
 
-          PROFILE_NAME="ca97b3a8-94d4-466e-837c-5029c83aea58.mobileprovision"
+          PROFILE_NAME="Dummy_Wildcard_iOS_Distribution_Profile.mobileprovision"
 
           # Decrypting files
           echo "Decrypting files"
