@@ -9,7 +9,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 	    <key>com.karthik.dummyci</key>
-        <string>Dummy Wildcard iOS Distribution Profile</string>
+        <string>Dummy_Wildcard_iOS_Distribution_Profile</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>(J9KY5Z2V8M)</string>
