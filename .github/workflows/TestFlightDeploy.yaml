@@ -16,9 +16,9 @@ jobs:
         - name: Test script
           env: 
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-          run: ./.github/scripts/dummy_script.sh
-            # ls -l ./.github/scripts/dummy_script.sh
-            # ./.github/scripts/dummy_script.sh
+          run: |
+            chmod +x ./.github/scripts/dummy_script.sh
+            ./.github/scripts/dummy_script.sh
             
 
       # - name: Checkout repository
