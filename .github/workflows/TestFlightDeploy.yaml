@@ -17,7 +17,7 @@ jobs:
           env: 
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
           run: |
-            chmod +x ./.github/scripts/decrypt_secrets.sh
+            chmod +x ./.github/secrets/decrypt_secrets.sh
 
       # - name: Test
       #   run: |
