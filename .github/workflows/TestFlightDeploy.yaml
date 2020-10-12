@@ -33,7 +33,7 @@ jobs:
         # run: |
         #   exec .github/secrets/decrypt_secrets.sh
         run: |
-          # set -eo pipefail
+          set -eo pipefail
 
           PROFILE_NAME="Dummy_Wildcard_iOS_Distribution_Profile.mobileprovision"
 
@@ -72,10 +72,10 @@ jobs:
 
       - name: Archiving project
         run: |
-          # set -eo pipefail
+          set -eo pipefail
 
           xcodebuild -project DummyCI.xcodeproj \
-            -scheme DummyCI
+            -scheme DummyCI \
             -sdk iphoneos \
             -configuration Release \
             -archivePath $PWD/build/DummyCI.xcarchive \
@@ -83,7 +83,7 @@ jobs:
 
       - name: Exporting .ipa
         run: |
-          # set -eo pipefail
+          set -eo pipefail
 
           xcodebuild -archivePath $PWD/build/DummyCI.xcarchive \
             -exportOptionsPlist ExportOptions.plist \
