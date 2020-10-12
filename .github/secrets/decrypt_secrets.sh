@@ -3,17 +3,17 @@ set -eo pipefail
 
 # del
 if [ "$PROFILE_DECRYPTION_KEY" == "superSecretPassPhrase1" ]
-          then
-            echo "Prov pass Correct"
-          else 
-            echo "Prov pass NOT correct"
-          fi
-          if [ "$CERTIFICATE_DECRYPTION_KEY" == "superSecretPassPhrase1" ]
-          then
-            echo "cert pass Correct"
-          else
-            echo "cert pass NOT Correct"
-          fi
+then
+  echo "Prov pass Correct"
+else 
+  echo "Prov pass NOT correct"
+fi
+if [ "$CERTIFICATE_DECRYPTION_KEY" == "superSecretPassPhrase1" ]
+then
+  echo "cert pass Correct"
+else
+  echo "cert pass NOT Correct"
+fi
 # del
 
 

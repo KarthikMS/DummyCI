@@ -29,44 +29,45 @@ jobs:
         env:
           PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
           CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
-        # run: ./.github/secrets/decrypt_secrets.sh
         run: |
-          # set -eo pipefail
+          ./.github/secrets/decrypt_secrets.sh
+        # run: |
+        #   # set -eo pipefail
 
-          PROFILE_NAME="ca97b3a8-94d4-466e-837c-5029c83aea58.mobileprovision"
+        #   PROFILE_NAME="ca97b3a8-94d4-466e-837c-5029c83aea58.mobileprovision"
 
-          # Decrypting files
-          echo "Decrypting files"
+        #   # Decrypting files
+        #   echo "Decrypting files"
 
-          gpg --verbose --batch --yes --decrypt --passphrase="$PROFILE_DECRYPTION_KEY" --output ./.github/secrets/${PROFILE_NAME} ./.github/secrets/${PROFILE_NAME}.gpg
-          gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/Certificates.p12 ./.github/secrets/Certificates.p12.gpg
+        #   gpg --verbose --batch --yes --decrypt --passphrase="$PROFILE_DECRYPTION_KEY" --output ./.github/secrets/${PROFILE_NAME} ./.github/secrets/${PROFILE_NAME}.gpg
+        #   gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/Certificates.p12 ./.github/secrets/Certificates.p12.gpg
           
-          echo "Finished decryption"
+        #   echo "Finished decryption"
 
 
-          # Moving Profile to destination
-          echo "Moving Profile to destination"
+        #   # Moving Profile to destination
+        #   echo "Moving Profile to destination"
 
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp ./.github/secrets/${PROFILE_NAME} ~/Library/MobileDevice/Provisioning\ Profiles/${PROFILE_NAME}
+        #   mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        #   cp ./.github/secrets/${PROFILE_NAME} ~/Library/MobileDevice/Provisioning\ Profiles/${PROFILE_NAME}
           
-          echo "Moved profile"
+        #   echo "Moved profile"
 
 
-          # Adding certificate to keychain
-          echo "Adding certificate to keychain"
+        #   # Adding certificate to keychain
+        #   echo "Adding certificate to keychain"
 
-          KEYCHAIN=~/Library/Keychains/build.keychain
-          PASS_PHRASE="Gonnai"
+        #   KEYCHAIN=~/Library/Keychains/build.keychain
+        #   PASS_PHRASE="Gonnai"
 
-          security create-keychain -p $PASS_PHRASE build.keychain
-          security import ./.github/secrets/Certificates.p12 -t agg -f pkcs12 -k $KEYCHAIN -P $PASS_PHRASE -A
+        #   security create-keychain -p $PASS_PHRASE build.keychain
+        #   security import ./.github/secrets/Certificates.p12 -t agg -f pkcs12 -k $KEYCHAIN -P $PASS_PHRASE -A
           
-          # security list-keychains -s $KEYCHAIN
-          # security default-keychain -s $KEYCHAIN
-          # security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
+        #   # security list-keychains -s $KEYCHAIN
+        #   # security default-keychain -s $KEYCHAIN
+        #   # security unlock-keychain -p $PASS_PHRASE $KEYCHAIN
           
-          # security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
+        #   # security set-key-partition-list -S apple-tool:,apple: -s -k $PASS_PHRASE $KEYCHAIN
 
       - name: Archiving project
         run: |
