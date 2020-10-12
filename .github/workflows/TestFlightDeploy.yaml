@@ -37,7 +37,6 @@ jobs:
         - name: Archiving project
           run: ./.github/scripts/archive.sh
       
-
         - name: Exporting .ipa
           run: ./.github/scripts/export_ipa.sh
 
