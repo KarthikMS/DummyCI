@@ -10,10 +10,13 @@ jobs:
     runs-on: macOS-latest
 
     steps:
+        - name: Print contents
+          run: ls -a
+
         - name: Test script
           env: 
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-          run: exec ./.github/scripts/DummyScript.sh
+          run: ./.github/scripts/DummyScript.sh
 
       # - name: Checkout repository
       #   uses: actions/checkout@v1
