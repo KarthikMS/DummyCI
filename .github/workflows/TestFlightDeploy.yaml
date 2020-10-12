@@ -29,6 +29,7 @@ jobs:
         env:
           PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
           CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
+          P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
         # run: |
         #   exec .github/secrets/decrypt_secrets.sh
         run: |
@@ -61,7 +62,7 @@ jobs:
           PASS_PHRASE="some"
 
           security create-keychain -p $PASS_PHRASE build.keychain
-          security import ./.github/secrets/Certificates.p12 -k $KEYCHAIN -P $CERTIFICATE_DECRYPTION_KEY -A
+          security import ./.github/secrets/Certificates.p12 -t agg -k $KEYCHAIN -P $P12_PASSPHRASE -A
           
           # security list-keychains -s $KEYCHAIN
           # security default-keychain -s $KEYCHAIN
