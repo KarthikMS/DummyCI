@@ -12,7 +12,7 @@
         <string>Dummy Wildcard iOS Distribution Profile</string>
 	</dict>
 	<key>signingCertificate</key>
-	<string>(J9KY5Z2V8M)</string>
+	<string>Apple Distribution: Karthik Maharajan Skandarajah (J9KY5Z2V8M)</string>
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>stripSwiftSymbols</key>
