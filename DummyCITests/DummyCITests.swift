@@ -19,7 +19,7 @@ class DummyCITests: XCTestCase {
     }
 
     func testExample() throws {
-        XCTAssertEqual(1, 3)
+        XCTAssertEqual(1, 1)
     }
 
     func testPerformanceExample() throws {
