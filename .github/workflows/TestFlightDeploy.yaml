@@ -16,8 +16,8 @@ jobs:
         - name: Test script
           env: 
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-          # run: ./.github/scripts/DummyScript.sh
-          run: sh DummyScript.sh
+          run: ./.github/scripts/dummyScript.sh
+          # run: sh DummyScript.sh
 
       # - name: Checkout repository
       #   uses: actions/checkout@v1
