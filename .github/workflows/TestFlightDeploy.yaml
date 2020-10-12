@@ -58,7 +58,7 @@ jobs:
           echo "Adding certificate to keychain"
 
           KEYCHAIN=~/Library/Keychains/build.keychain
-          PASS_PHRASE="some"
+          PASS_PHRASE=some
 
           security create-keychain -p $PASS_PHRASE build.keychain
           security import ./.github/secrets/Certificates.p12 -k $KEYCHAIN -P $PASS_PHRASE -A
