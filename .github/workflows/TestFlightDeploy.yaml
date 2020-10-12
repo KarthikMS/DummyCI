@@ -11,9 +11,9 @@ jobs:
 
     steps:
         - name: Test script
-        - env: 
+          env: 
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
-        - run: |
+          run: |
             exec DummyScript.sh
 
       # - name: Checkout repository
