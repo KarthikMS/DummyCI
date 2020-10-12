@@ -10,8 +10,8 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-        - name: Print contents
-          run: cd .github; ls -a
+        # - name: Print contents
+        #   run: cd .github; ls -a
 
         - name: Test script
           env: 
