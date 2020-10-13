@@ -49,6 +49,7 @@
 		252E13B225309F380018E3EC /* DummyCIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DummyCIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		252E13B625309F380018E3EC /* DummyCIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCIUITests.swift; sourceTree = "<group>"; };
 		252E13B825309F380018E3EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25BCBE9B253579880040E106 /* DummyCI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DummyCI.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +100,7 @@
 		252E139325309F340018E3EC /* DummyCI */ = {
 			isa = PBXGroup;
 			children = (
+				25BCBE9B253579880040E106 /* DummyCI.entitlements */,
 				252E139425309F340018E3EC /* AppDelegate.swift */,
 				252E139625309F340018E3EC /* SceneDelegate.swift */,
 				252E139825309F340018E3EC /* ViewController.swift */,
@@ -436,7 +438,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DummyCI/DummyCI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = J9KY5Z2V8M;
@@ -449,6 +453,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthik.dummyci;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Dummy Wildcard iOS Distribution Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "DummyCI Mac Development Profile";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -459,7 +465,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DummyCI/DummyCI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = J9KY5Z2V8M;
@@ -472,6 +480,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karthik.dummyci;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Dummy Wildcard iOS Distribution Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "DummyCI Mac Development Profile";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
