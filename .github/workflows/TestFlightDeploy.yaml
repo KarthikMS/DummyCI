@@ -11,6 +11,9 @@ jobs:
   deploy:
     name: Deploying to Testflight
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ["platform=iOS\ Simulator,OS=13.7,name=iPhone\ 11","platform=macOS"]
 
     steps:
         - name: Checkout repository
@@ -20,9 +23,6 @@ jobs:
           run: |
             chmod +x ./.github/scripts/*.sh
             chmod +x ./.github/secrets/decrypt_secrets.sh
-
-        - name: Test
-          run: ./.github/scripts/test.sh
   
         - name: Install gpg
           run: brew install gpg
@@ -32,18 +32,23 @@ jobs:
             PROFILE_DECRYPTION_KEY: ${{ secrets.PROFILE_DECRYPTION_KEY }}
             CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
             P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
+            MAC_DEV_P12_PASSPHRASE: ${{ secrets.MAC_DEV_P12_PASSPHRASE }}
           run: ./.github/secrets/decrypt_secrets.sh
 
-        - name: Archiving project
-          run: ./.github/scripts/archive.sh
-      
-
-        - name: Exporting .ipa
-          run: ./.github/scripts/export_ipa.sh
-
-        - name: Publishing app
-          if: success()
+        - name: Test
           env:
-            APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
-            APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
-          run: ./.github/scripts/upload_app.sh
+            DESTINATION: ${{ matrix.destination }}
+          run: ./.github/scripts/test.sh
+
+        # - name: Archiving project
+        #   run: ./.github/scripts/archive.sh
+      
+        # - name: Exporting .ipa
+        #   run: ./.github/scripts/export_ipa.sh
+
+        # - name: Publishing app
+        #   if: success()
+        #   env:
+        #     APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+        #     APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        #   run: ./.github/scripts/upload_app.sh

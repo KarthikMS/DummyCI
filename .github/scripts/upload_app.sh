@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eo pipefail
 
-run: xcrun altool --upload-app \
+xcrun altool --upload-app \
   -t ios \
   -f $PWD/build/DummyCI.ipa \
   -u "$APPLEID_USERNAME" \
