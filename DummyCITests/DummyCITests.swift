@@ -19,7 +19,8 @@ class DummyCITests: XCTestCase {
     }
 
     func testExample() throws {
-        XCTAssertEqual(1, 1)
+        let platform = ViewController().platform
+        XCTAssertEqual(platform, "mac")
     }
 
     func testPerformanceExample() throws {
