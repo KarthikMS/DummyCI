@@ -34,6 +34,7 @@ jobs:
             CERTIFICATE_DECRYPTION_KEY: ${{ secrets.CERTIFICATE_DECRYPTION_KEY }}
             P12_PASSPHRASE: ${{ secrets.P12_PASSPHRASE }}
             DEVELOPMENT_PROFILE_DECRYPTION_KEY: ${{ secrets.DEVELOPMENT_PROFILE_DECRYPTION_KEY }}
+            MAC_DEV_P12_PASSPHRASE: ${{ secrets.MAC_DEV_P12_PASSPHRASE }}
           run: ./.github/secrets/decrypt_secrets.sh
 
         - name: Test
