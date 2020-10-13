@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     }
 }
 
-#if targetEnvironment(macCatalyst)
-extension ViewController: NSTouchBarDelegate {
-    
-}
-#endif
+//#if targetEnvironment(macCatalyst)
+//extension ViewController: NSTouchBarDelegate {
+//    
+//}
+//#endif
