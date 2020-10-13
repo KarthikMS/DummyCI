@@ -7,7 +7,7 @@ MACOS_DEVELOPMENT_PROFILE="DummyCI_Mac_Development_Profile.provisionprofile"
 # Decrypting files
 gpg --verbose --batch --yes --decrypt --passphrase="$PROFILE_DECRYPTION_KEY" --output ./.github/secrets/${IOS_DISTRIBUTION_PROFILE_NAME} ./.github/secrets/${IOS_DISTRIBUTION_PROFILE_NAME}.gpg
 gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/Certificates.p12 ./.github/secrets/Certificates.p12.gpg
-gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/${MACOS_DEVELOPMENT_PROFILE}.p12 ./.github/secrets/#{MACOS_DEVELOPMENT_PROFILE}.gpg
+gpg --verbose --batch --yes --decrypt --passphrase="$CERTIFICATE_DECRYPTION_KEY" --output ./.github/secrets/${MACOS_DEVELOPMENT_PROFILE}.p12 ./.github/secrets/${MACOS_DEVELOPMENT_PROFILE}.gpg
 echo "Finished decryption"
 
 # Moving Profile to destination
