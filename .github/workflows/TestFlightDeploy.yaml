@@ -27,7 +27,7 @@ jobs:
 
         - name: Test
           env:
-            DESTINATION: ${{ matrix.destination }
+            DESTINATION: ${{ matrix.destination }}
           run: ./.github/scripts/test.sh
   
         # - name: Install gpg
