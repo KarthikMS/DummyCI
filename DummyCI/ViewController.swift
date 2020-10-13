@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     var platform: String {
         #if targetEnvironment(macCatalyst)
         return "mac"
@@ -16,12 +15,10 @@ class ViewController: UIViewController {
         return "iPhone"
         #endif
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-
 }
 
+#if targetEnvironment(macCatalyst)
+extension ViewController: NSTouchBarDelegate {
+    
+}
+#endif
